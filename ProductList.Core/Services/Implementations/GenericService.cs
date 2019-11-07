@@ -1,4 +1,5 @@
-﻿using ProductList.Core.Services.Contracts;
+﻿using AutoMapper;
+using ProductList.Core.Services.Contracts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,37 +8,43 @@ using System.Threading.Tasks;
 
 namespace ProductList.Core.Services.Implementations
 {
-    public class GenericService<T> : IService<T> where T : class
+    public class GenericService<TModel, TRepository> : IService<TModel> where TModel : class
     {
+        private readonly TRepository _repository;
+        private readonly IMapper _mapper;
 
+        public GenericService(TRepository repository, IMapper mapper)
+        {
+            _repository = repository;
+            _mapper = mapper;
+        }
 
-
-        public Task<T> Add(T entity)
+        public Task<TModel> Add(TModel entity)
         {
             throw new NotImplementedException();
         }
 
-        public Task Delete(T entity)
+        public Task Delete(TModel entity)
         {
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<T>> GetAll()
+        public Task<IEnumerable<TModel>> GetAll()
         {
             throw new NotImplementedException();
         }
 
-        public Task<T> GetById(int Id)
+        public Task<TModel> GetById(int Id)
         {
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<T>> GetItems(int pageSize = 10, int pageIndex = 1)
+        public Task<IEnumerable<TModel>> GetItems(int pageSize = 10, int pageIndex = 1)
         {
             throw new NotImplementedException();
         }
 
-        public Task<T> Update(T entity)
+        public Task<TModel> Update(TModel entity)
         {
             throw new NotImplementedException();
         }
