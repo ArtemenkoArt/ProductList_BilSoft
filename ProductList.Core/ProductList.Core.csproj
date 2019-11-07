@@ -50,9 +50,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Infrastructure\Mapper\CoreMapperConfig.cs" />
-    <Compile Include="Infrastructure\Mapper\CoreMapperProfile.cs" />
-    <Compile Include="Infrastructure\Ninject\CoreKernel.cs" />
+    <Compile Include="Infrastructure\MapperConfig\CoreMapperConfig.cs" />
+    <Compile Include="Infrastructure\MapperConfig\CoreMapperProfile.cs" />
+    <Compile Include="Infrastructure\NinjectConfig\CoreKernel.cs" />
     <Compile Include="Models\ProductCategoryCore.cs" />
     <Compile Include="Models\ProductCore.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

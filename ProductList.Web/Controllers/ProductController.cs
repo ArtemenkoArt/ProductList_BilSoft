@@ -12,7 +12,7 @@ namespace ProductList.Web.Controllers
     public class ProductController : Controller
     {
         private readonly IProductCategoryService _categoryService;
-        private IProductService _service;
+        private readonly IProductService _service;
         private readonly IMapper _mapper;
 
         public ProductController(IProductService service, IMapper mapper, IProductCategoryService categoryService)
@@ -29,11 +29,10 @@ namespace ProductList.Web.Controllers
         }
 
         //List
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> Index(int pageSize = 10, int pageIndex = 0)
         {
-            var items = await _service.GetAll();
-            var itemDto = _mapper.Map<IEnumerable<ProductViewModel>>(items);
-            return View(itemDto);
+            var items = _mapper.Map<IEnumerable<ProductViewModel>>(await _service.GetItems(pageSize, pageIndex));
+            return View(items);
         }
 
         //Create
@@ -52,7 +51,7 @@ namespace ProductList.Web.Controllers
                 await _service.Add(_mapper.Map<ProductCore>(item));
                 return Json(new { success = true });
             }
-            ViewBag.CategoryId = new SelectList(await GetAllCategory(), "Id", "Name");
+            ViewBag.CategoryId = new SelectList(await GetAllCategory(), "Id", "Name", item.CategoryId);
 
             return Json(item, JsonRequestBehavior.AllowGet);
         }

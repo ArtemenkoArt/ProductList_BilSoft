@@ -21,9 +21,9 @@ namespace ProductList.Dal.Repositories.Implementations
             _dbSet = context.Set<T>();
         }
 
-        public async Task<IEnumerable<T>> GetItems(int pageSize = 10, int pageIndex = 1)
+        public async Task<IEnumerable<T>> GetItems(int pageSize = 10, int pageIndex = 0)
         {
-            var list = await _dbSet.Skip(pageSize * pageIndex).Take(pageSize).ToListAsync();
+            var list = await _dbSet.OrderBy(x=> x.Id).Skip(pageSize * pageIndex).Take(pageSize).ToListAsync();
             return list;
         }
 

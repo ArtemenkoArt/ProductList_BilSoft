@@ -1,12 +1,13 @@
 ﻿using AutoMapper;
 using ProductList.Core.Models;
 using ProductList.Core.Services.Contracts;
+using ProductList.Web.Models;
 using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 
-namespace ProductList.Web.Models
+namespace ProductList.Web.Controllers
 {
     public class ProductCategoryController : Controller
     {
@@ -20,10 +21,9 @@ namespace ProductList.Web.Models
         }
 
         //List
-        public async Task<ActionResult> Index(int categoryId = 0, int page = 1)
+        public async Task<ActionResult> Index(int pageSize = 10, int pageIndex = 1)
         {
-            var items = await _service.GetAll();
-            var itemsDto = _mapper.Map<IEnumerable<ProductCategoryViewModel>>(items);
+            var itemsDto = _mapper.Map<IEnumerable<ProductCategoryViewModel>>(await _service.GetItems(pageSize, pageIndex));
             return View(itemsDto);
         }
 
@@ -36,7 +36,7 @@ namespace ProductList.Web.Models
         //Create Post
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Id,Name")] ProductCategoryViewModel item)
+        public async Task<ActionResult> Create([Bind(Include = "Id, Name")] ProductCategoryViewModel item)
         {
             if (ModelState.IsValid)
             {
@@ -66,11 +66,11 @@ namespace ProductList.Web.Models
         //Edit Post
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,Name")] ProductCategoryViewModel item)
+        public async Task<ActionResult> Edit([Bind(Include = "Id, Name")] ProductCategoryViewModel item)
         {
             if (ModelState.IsValid)
             {
-                item = _mapper.Map<ProductCategoryViewModel>(await _service.Update(_mapper.Map<ProductCategoryCore>(item)));
+                _mapper.Map<ProductCategoryViewModel>(await _service.Update(_mapper.Map<ProductCategoryCore>(item)));
                 return Json(new { success = true });
             }
             return Json(item, JsonRequestBehavior.AllowGet);

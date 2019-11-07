@@ -2,7 +2,7 @@
 using ProductList.Core.Models;
 using ProductList.Dal.Entities;
 
-namespace ProductList.Core.Infrastructure.Mapper
+namespace ProductList.Core.Infrastructure.MapperConfig
 {
     public class CoreMapperProfile : Profile
     {

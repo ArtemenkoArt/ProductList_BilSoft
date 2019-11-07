@@ -10,6 +10,8 @@ namespace ProductList.Web.App_Start
 
     using Ninject;
     using Ninject.Web.Common;
+    using Ninject.Web.Common.WebHost;
+    using ProductList.Web.Infrastructure.NinjectConfig;
 
     public static class NinjectWebCommon 
     {
@@ -60,6 +62,7 @@ namespace ProductList.Web.App_Start
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
+            WebKernel.Initialize(kernel);
         }        
     }
 }

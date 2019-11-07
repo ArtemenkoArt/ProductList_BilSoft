@@ -39,7 +39,7 @@ namespace ProductList.Core.Services.Implementations
             return _mapper.Map<ProductCategoryCore>(await _repository.GetById(Id));
         }
 
-        public async Task<IEnumerable<ProductCategoryCore>> GetItems(int pageSize = 10, int pageIndex = 1)
+        public async Task<IEnumerable<ProductCategoryCore>> GetItems(int pageSize = 10, int pageIndex = 0)
         {
             return _mapper.Map<IEnumerable<ProductCategoryCore>>(await _repository.GetItems(pageSize, pageIndex));
         }

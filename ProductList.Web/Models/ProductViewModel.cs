@@ -6,6 +6,7 @@ namespace ProductList.Web.Models
     public class ProductViewModel
     {
         [ReadOnly(true)]
+        [Display(Name = "Product Id")]
         public int Id { get; set; }
 
         [Display(Name = "Product name")]

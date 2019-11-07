@@ -2,9 +2,9 @@
 using Ninject.Web.Common;
 using ProductList.Core.Services.Contracts;
 using ProductList.Core.Services.Implementations;
-using ProductList.Dal.Infrastructure;
+using ProductList.Dal.Infrastructure.NinjectConfig;
 
-namespace ProductList.Core.Infrastructure.Ninject
+namespace ProductList.Core.Infrastructure.NinjectConfig
 {
     public static class CoreKernel
     {

@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 
-namespace ProductList.Core.Infrastructure.Mapper
+namespace ProductList.Core.Infrastructure.MapperConfig
 {
     public static class CoreMapperConfig
     {

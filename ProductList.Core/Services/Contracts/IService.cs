@@ -10,6 +10,6 @@ namespace ProductList.Core.Services.Contracts
         Task<TModel> Update(TModel entity);
         Task<TModel> GetById(int Id);
         Task<IEnumerable<TModel>> GetAll();
-        Task<IEnumerable<TModel>> GetItems(int pageSize = 10, int pageIndex = 1);
+        Task<IEnumerable<TModel>> GetItems(int pageSize = 10, int pageIndex = 0);
     }
 }

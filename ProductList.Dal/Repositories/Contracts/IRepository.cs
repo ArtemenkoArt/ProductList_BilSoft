@@ -14,6 +14,6 @@ namespace ProductList.Dal.Repositories.Contracts
         Task<TEntity> GetById(int Id);
         Task<IEnumerable<TEntity>> GetBy(Expression<Func<TEntity, bool>> predicate);
         Task<IEnumerable<TEntity>> GetAll();
-        Task<IEnumerable<TEntity>> GetItems(int pageSize = 10, int pageIndex = 1);
+        Task<IEnumerable<TEntity>> GetItems(int pageSize = 10, int pageIndex = 0);
     }
 }

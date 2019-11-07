@@ -4,7 +4,7 @@ using ProductList.Dal.Context;
 using ProductList.Dal.Repositories.Contracts;
 using ProductList.Dal.Repositories.Implementations;
 
-namespace ProductList.Dal.Infrastructure
+namespace ProductList.Dal.Infrastructure.NinjectConfig
 {
     public static class DalKernel
     {
