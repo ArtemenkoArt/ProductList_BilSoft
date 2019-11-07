@@ -63,7 +63,7 @@
     <Compile Include="Entities\IEntities.cs" />
     <Compile Include="Entities\Product.cs" />
     <Compile Include="Entities\ProductCategory.cs" />
-    <Compile Include="Infrastructure\DalKernel.cs" />
+    <Compile Include="Infrastructure\Ninject\DalKernel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\Contracts\IProductCategoryRepository.cs" />
     <Compile Include="Repositories\Contracts\IProductRepository.cs" />

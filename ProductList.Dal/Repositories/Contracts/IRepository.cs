@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProductList.Dal.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
@@ -13,6 +14,6 @@ namespace ProductList.Dal.Repositories.Contracts
         Task<TEntity> GetById(int Id);
         Task<IEnumerable<TEntity>> GetBy(Expression<Func<TEntity, bool>> predicate);
         Task<IEnumerable<TEntity>> GetAll();
-        Task<IEnumerable<TEntity>> GetItems(int pageSize, int pageIndex);
+        Task<IEnumerable<TEntity>> GetItems(int pageSize = 10, int pageIndex = 1);
     }
 }

@@ -22,7 +22,7 @@ namespace ProductList.Dal.Repositories.Implementations
             _dbSet = context.Set<T>();
         }
 
-        public async Task<IEnumerable<T>> GetItems(int pageSize, int pageIndex)
+        public async Task<IEnumerable<T>> GetItems(int pageSize = 10, int pageIndex = 1)
         {
             var list = await _dbSet.Skip(pageSize * pageIndex).Take(pageSize).ToListAsync();
             return list;

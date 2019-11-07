@@ -5,7 +5,6 @@ namespace ProductList.Web.Models
 {
     public class ProductViewModel
     {
-        [Key]
         [ReadOnly(true)]
         public int Id { get; set; }
 
