@@ -11,5 +11,6 @@ namespace ProductList.Core.Services.Contracts
         Task<TModel> GetById(int Id);
         Task<IEnumerable<TModel>> GetAll();
         Task<IEnumerable<TModel>> GetItems(int pageSize = 10, int pageIndex = 0);
+        void Dispose();
     }
 }

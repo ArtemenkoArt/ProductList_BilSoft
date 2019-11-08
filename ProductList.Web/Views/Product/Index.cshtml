@@ -28,7 +28,7 @@
     {
         <tr>
             <td>
-                @item.Id)
+                @item.Id
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
@@ -40,10 +40,21 @@
                 <p>
                     @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-success", @data_modal = "" }) |
                     @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-info", @data_modal = "" }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-warning" })
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-warning", @data_modal = "" })
                 </p>
             </td>
         </tr>
     }
 
 </table>
+
+<!-- modal placeholder-->
+<div id='myModal' class='modal fade in'>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id='myModalContent'></div>
+        </div>
+    </div>
+</div>
+
+<script src="~/Scripts/modalwindow.js"></script>

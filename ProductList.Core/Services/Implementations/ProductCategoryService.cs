@@ -48,5 +48,10 @@ namespace ProductList.Core.Services.Implementations
         {
             return _mapper.Map<ProductCategoryCore>(await _repository.Update(_mapper.Map<ProductCategory>(entity)));
         }
+
+        public void Dispose()
+        {
+            _repository.Dispose();
+        }
     }
 }

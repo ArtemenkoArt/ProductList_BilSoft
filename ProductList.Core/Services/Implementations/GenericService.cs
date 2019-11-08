@@ -48,5 +48,10 @@ namespace ProductList.Core.Services.Implementations
         {
             throw new NotImplementedException();
         }
+
+        public void Dispose()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

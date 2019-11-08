@@ -82,17 +82,28 @@ namespace ProductList.Web.Controllers
         }
 
         //Delete
-        public ActionResult Delete()
+        public async Task<ActionResult> Delete(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var product = _mapper.Map<ProductViewModel>(await _service.GetById(id.Value));
+            return PartialView(product);
         }
 
         [HttpPost]
-        public async Task<ActionResult> Delete(int id)
+        public async Task<ActionResult> Delete(ProductViewModel item)
         {
-            var item = await _service.GetById(id);
-            await _service.Delete(item);
+            var product = await _service.GetById(item.Id);
+            await _service.Delete(product);
             return Json(new { success = true });
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            _categoryService.Dispose();
+            base.Dispose(disposing);
         }
     }
 }

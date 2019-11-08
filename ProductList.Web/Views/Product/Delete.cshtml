@@ -1,0 +1,56 @@
+﻿@model ProductList.Web.Models.ProductViewModel
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<link href="~/Content/combobox.css" rel="stylesheet" />
+
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h4 class="modal-title">Delete product?</h4>
+</div>
+
+@using (Html.BeginForm())
+{
+    <div class="modal-body">
+        <div>
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Id)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Id)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Name)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Name)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Category)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Category.Name)
+                </dd>
+
+            </dl>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Delete" class="btn btn-success btn-sm" />
+                <button class="btn btn-warning btn-sm" data-dismiss="modal">Dismiss</button>
+            </div>
+        </div>
+    </div>
+}
+<script src="~/Scripts/jquery.combobox.js"></script>
+

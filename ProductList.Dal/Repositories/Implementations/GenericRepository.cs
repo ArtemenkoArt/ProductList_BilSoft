@@ -14,6 +14,7 @@ namespace ProductList.Dal.Repositories.Implementations
     {
         internal readonly ProductListContext _context;
         internal readonly DbSet<T> _dbSet;
+        private bool disposed = false;
 
         public GenericRepository(ProductListContext context)
         {
@@ -40,10 +41,10 @@ namespace ProductList.Dal.Repositories.Implementations
             return result;
         }
 
-        public async Task Delete(T entity)
+        public virtual async Task<int> Delete(T entity)
         {
-            _dbSet.Remove(entity);
-            await SaveChangesAsync();
+            _context.Set<T>().Remove(await GetById(entity.Id));
+            return await _context.SaveChangesAsync();
         }
 
         public virtual async Task<T> GetById(int Id)
@@ -62,7 +63,7 @@ namespace ProductList.Dal.Repositories.Implementations
 
             if (existing != null)
             {
-                _context.Entry(existing).State = EntityState.Modified;
+                _context.Entry(existing).CurrentValues.SetValues(entity);
                 await _context.SaveChangesAsync();
             }
             return existing;
@@ -71,6 +72,24 @@ namespace ProductList.Dal.Repositories.Implementations
         public virtual async Task SaveChangesAsync()
         {
             await _context.SaveChangesAsync();
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!this.disposed)
+            {
+                if (disposing)
+                {
+                    _context.Dispose();
+                }
+                this.disposed = true;
+            }
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
     }
 }
