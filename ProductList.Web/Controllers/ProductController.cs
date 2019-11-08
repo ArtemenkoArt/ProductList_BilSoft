@@ -22,12 +22,6 @@ namespace ProductList.Web.Controllers
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<ProductCategoryViewModel>> GetAllCategory()
-        {
-            var items = await _categoryService.GetAll();
-            return _mapper.Map<IEnumerable<ProductCategoryViewModel>>(items);
-        }
-
         //List
         public async Task<ActionResult> Index(int pageSize = 10, int pageIndex = 0)
         {
@@ -95,14 +89,20 @@ namespace ProductList.Web.Controllers
         [HttpPost]
         public async Task<ActionResult> Delete(ProductViewModel item)
         {
-            var product = await _service.GetById(item.Id);
-            await _service.Delete(product);
+            await _service.Delete(await _service.GetById(item.Id));
             return Json(new { success = true });
+        }
+
+        public async Task<IEnumerable<ProductCategoryViewModel>> GetAllCategory()
+        {
+            var items = await _categoryService.GetAll();
+            return _mapper.Map<IEnumerable<ProductCategoryViewModel>>(items);
         }
 
         protected override void Dispose(bool disposing)
         {
             _categoryService.Dispose();
+            _service.Dispose();
             base.Dispose(disposing);
         }
     }

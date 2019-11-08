@@ -21,22 +21,21 @@ namespace ProductList.Web.Controllers
         }
 
         //List
-        public async Task<ActionResult> Index(int pageSize = 10, int pageIndex = 1)
+        public async Task<ActionResult> Index(int pageSize = 10, int pageIndex = 0)
         {
-            var itemsDto = _mapper.Map<IEnumerable<ProductCategoryViewModel>>(await _service.GetItems(pageSize, pageIndex));
-            return View(itemsDto);
+            var items = _mapper.Map<IEnumerable<ProductCategoryViewModel>>(await _service.GetItems(pageSize, pageIndex));
+            return View(items);
         }
 
         //Create
-        public ActionResult Create()
+        public async Task<ActionResult> Create()
         {
             return PartialView("Create");
         }
 
-        //Create Post
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Id, Name")] ProductCategoryViewModel item)
+        public async Task<ActionResult> Create([Bind(Include = "Id,Name")] ProductCategoryViewModel item)
         {
             if (ModelState.IsValid)
             {
@@ -53,41 +52,45 @@ namespace ProductList.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-
             var category = _mapper.Map<ProductCategoryViewModel>(await _service.GetById(id.Value));
-
-            if (category == null)
-            {
-                return HttpNotFound();
-            }
             return PartialView(category);
         }
 
-        //Edit Post
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit([Bind(Include = "Id, Name")] ProductCategoryViewModel item)
         {
             if (ModelState.IsValid)
             {
-                _mapper.Map<ProductCategoryViewModel>(await _service.Update(_mapper.Map<ProductCategoryCore>(item)));
+                await _service.Update(_mapper.Map<ProductCategoryCore>(item));
                 return Json(new { success = true });
             }
             return Json(item, JsonRequestBehavior.AllowGet);
         }
 
+
         //Delete
-        public ActionResult Delete()
+        public async Task<ActionResult> Delete(int? id)
         {
-            return PartialView();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var category = _mapper.Map<ProductCategoryViewModel>(await _service.GetById(id.Value));
+            return PartialView(category);
         }
 
         [HttpPost]
-        public async Task<ActionResult> Delete(int id)
+        public async Task<ActionResult> Delete(ProductCategoryViewModel item)
         {
-            await _service.Delete(await _service.GetById(id));
+            await _service.Delete(await _service.GetById(item.Id));
             return Json(new { success = true });
         }
 
+        protected override void Dispose(bool disposing)
+        {
+            _service.Dispose();
+            base.Dispose(disposing);
+        }
     }
 }

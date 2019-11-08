@@ -8,11 +8,11 @@ namespace ProductList.Core.Models
         [ReadOnly(true)]
         public int Id { get; set; }
         public string Name { get; set; }
-        public virtual ICollection<ProductCore> Products { get; set; }
+        //public virtual ICollection<ProductCore> Products { get; set; }
 
-        public ProductCategoryCore()
-        {
-            Products = new List<ProductCore>();
-        }
+        //public ProductCategoryCore()
+        //{
+        //    Products = new List<ProductCore>();
+        //}
     }
 }
