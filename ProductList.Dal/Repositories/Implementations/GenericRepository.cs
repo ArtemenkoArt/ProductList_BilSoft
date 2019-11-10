@@ -69,6 +69,11 @@ namespace ProductList.Dal.Repositories.Implementations
             return existing;
         }
 
+        public async Task<int> Count()
+        {
+            return await _dbSet.CountAsync();
+        }
+
         public virtual async Task SaveChangesAsync()
         {
             await _context.SaveChangesAsync();

@@ -53,5 +53,10 @@ namespace ProductList.Core.Services.Implementations
         {
             throw new NotImplementedException();
         }
+
+        public Task<int> Count()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

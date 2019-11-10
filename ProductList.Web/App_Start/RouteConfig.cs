@@ -9,6 +9,21 @@ namespace ProductList.Web
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            //paging Product
+            routes.MapRoute(
+                name: null,
+                url: "Page{page}",
+                defaults: new { controller = "Product", action = "Index" }
+            );
+
+            //paging ProductCategory
+            routes.MapRoute(
+                name: null,
+                url: "Page{page}",
+                defaults: new { controller = "ProductCategory", action = "Index" }
+            );
+
+            //default
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",

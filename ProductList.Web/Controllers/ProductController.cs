@@ -23,10 +23,13 @@ namespace ProductList.Web.Controllers
         }
 
         //List
-        public async Task<ActionResult> Index(int pageSize = 10, int pageIndex = 0)
+        public async Task<ActionResult> Index(int page = 1)
         {
-            var items = _mapper.Map<IEnumerable<ProductViewModel>>(await _service.GetItems(pageSize, pageIndex));
-            return View(items);
+            int pageSize = 10;
+            var items = _mapper.Map<IEnumerable<ProductViewModel>>(await _service.GetItems(pageSize, page - 1));
+            var pageInfo = new PageInfo() { PageNumber = page, PageSize = pageSize, TotalItems = await _service.Count()};
+            ProductListViewModel productList = new ProductListViewModel() { Products = items, PageInfo = pageInfo };
+            return View(productList);
         }
 
         //Create
